@@ -1,0 +1,25 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Enlazar el CSS de historial -->
+<link rel="stylesheet" href="{% static 'css/historial.css' %}">
+
+<div class="container">
+    <h1>Historial de Bebidas</h1>
+    {% if user.is_authenticated %}
+        <div class="history">
+            {% for bebida in historial %}
+                <div class="history-item">
+                    <p><strong>{{ bebida.nombre }}</strong> - {{ bebida.fecha }}</p>
+                </div>
+            {% empty %}
+                <p>No hay bebidas registradas.</p>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Para ver tu historial de bebidas, <a href="{% url 'login' %}">inicia sesión</a>.</p>
+    {% endif %}
+    <a href="{% url 'home' %}" class="btn-back">🔙 Volver al Home</a>
+</div>
+{% endblock %}

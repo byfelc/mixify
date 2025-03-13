@@ -1,0 +1,28 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Enlazar el CSS de gestión -->
+<link rel="stylesheet" href="{% static 'css/historial.css' %}">
+
+<div class="container">
+    <h1>Gestión de Ingredientes</h1>
+    {% if user.is_authenticated %}
+        <form method="POST">
+            {% csrf_token %}
+            {% for ingrediente in ingredientes %}
+                <div class="ingredient-box">
+                    <label>Ingrediente {{ forloop.counter }}:</label>
+                    <input type="text" name="nombre_{{ forloop.counter }}" value="{{ ingrediente.nombre }}" required>
+                    <label>Cantidad (%):</label>
+                    <input type="number" name="cantidad_{{ forloop.counter }}" value="{{ ingrediente.cantidad }}" min="0" max="100" required>
+                </div>
+            {% endfor %}
+            <button type="submit" class="save-btn">Guardar Cambios</button>
+        </form>
+    {% else %}
+        <p>Para gestionar los ingredientes, <a href="{% url 'login' %}">inicia sesión</a>.</p>
+    {% endif %}
+    <a href="{% url 'home' %}" class="btn-back">🔙 Volver al Home</a>
+</div>
+{% endblock %}

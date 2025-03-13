@@ -1,0 +1,34 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Enlazar el CSS específico para Home -->
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>Descubre el poder de <span>Mixify</span></h1>
+        <p>Automatiza la preparación de bebidas con precisión y facilidad.</p>
+        <div class="hero-buttons">
+            <a href="{% url 'historial' %}" class="btn-primary">Historial de Bebidas</a>
+            <a href="{% url 'gestion' %}" class="btn-secondary">Gestión de Ingredientes</a>
+        </div>
+    </div>
+</div>
+
+<!-- 🔹 Tarjetas de estadísticas -->
+<div class="stats-container">
+    <div class="stat-box">
+        <h2>2</h2>
+        <p>Tipos de liquidos</p>
+    </div>
+    <div class="stat-box">
+        <h2>90%</h2>
+        <p>Precisión en la dosificación</p>
+    </div>
+    <div class="stat-box">
+        <h2>24/7</h2>
+        <p>Monitoreo en tiempo real</p>
+    </div>
+</div>
+{% endblock %}
