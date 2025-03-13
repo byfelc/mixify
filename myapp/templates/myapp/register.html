@@ -1,0 +1,33 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Enlazar el CSS del registro -->
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+
+<div class="container">
+    <div class="left-section">
+        <div class="overlay">
+            <h1>MIXIFY</h1>
+            <h2>Regístrate y comienza a mezclar</h2>
+        </div>
+    </div>
+    <div class="right-section">
+        <h1>Crear una cuenta</h1>
+        <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" name="first_name" placeholder="Nombre" required>
+                <input type="text" name="last_name" placeholder="Apellido" required>
+            </div>
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <input type="password" name="confirm_password" placeholder="Confirmar contraseña" required>
+
+            <button type="submit" class="register-btn">Crear cuenta</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

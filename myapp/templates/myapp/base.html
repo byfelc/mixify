@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mixify</title>
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+</head>
+<body>
+
+    <!-- 🔹 Navbar Mejorado -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'home' %}" class="nav-logo">MIXIFY</a>
+            <div class="nav-links">
+                {% if user.is_authenticated %}
+                    <span class="nav-user">Hola, {{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="btn-logout">Cerrar sesión</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-login">Iniciar Sesión</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
