@@ -1,14 +1,43 @@
 from django.shortcuts import render, redirect
-from .models import HistorialBebidas, Ingrediente  # ✅ Importar los modelos
+from .models import HistorialBebidas, Ingrediente, CustomUser  # ✅ Importar los modelos
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login as auth_login
+
 
 def home(request):
     return render(request, 'myapp/home.html')
 
 def register(request):
-    return render(request, 'myapp/register.html')
+    if request.method == 'POST':
+        nombre = request.POST['nombre']
+        usuario = request.POST['usuario']
+        contrasena = request.POST['contrasena']
+        correo = request.POST['correo']
+
+        user = CustomUser.objects.create_user(
+            usuario=usuario,
+            contrasena=contrasena,
+            nombre=nombre,
+            correo=correo,
+        )
+
+        return redirect('login')
+    return render(request, 'register.html')
 
 def login_view(request):
-    return render(request, 'myapp/login.html')
+    if request.method == 'POST':
+        username = request.POST["usuario"]
+        password = request.POST["contrasena"]
+        print("como lo mueve ${username}")
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            print("si sale")
+            return redirect('home')
+        else:
+            print("no sale")
+            return render(request, 'login.html')
+    return render(request, 'login.html')
 
 def logout_view(request):
     return render(request, 'myapp/logout.html')  # Si no tienes logout.html, usa Django auth.logout

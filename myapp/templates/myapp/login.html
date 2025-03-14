@@ -17,7 +17,9 @@
         <p>¿No tienes una cuenta? <a href="{% url 'register' %}">Crea una cuenta </a></p>
         <form method="POST">
             {% csrf_token %}
-            <input type="email" name="email" placeholder="Correo electrónico" required>
+            <label>email<label>
+            <input type="email" name="email" placeholder="Email" required>
+            <label>contraseña<label>
             <input type="password" name="password" placeholder="Contraseña" required>
             <button type="submit" class="register-btn">Iniciar sesion</button>
         </form>
