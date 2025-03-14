@@ -11,7 +11,7 @@ db = client['mixifydb']
 
 class CustomUsermanager(BaseUserManager):
 
-    def create_user(self, usuario, nombre, correo, telefono, estatus, contrasena):
+    def create_user(self, usuario, nombre, correo, estatus, contrasena):
         if not usuario:
             raise ValueError("Ingrese nombre de usuario")
         
