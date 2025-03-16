@@ -22,7 +22,7 @@ def register(request):
         )
 
         return redirect('login')
-    return render(request, 'register.html')
+    return render(request, 'myapp/register.html')
 
 def login_view(request):
     if request.method == 'POST':
@@ -33,11 +33,11 @@ def login_view(request):
         if user is not None:
             auth_login(request, user)
             print("si sale")
-            return redirect('home')
+            return redirect('myapp/home')
         else:
             print("no sale")
-            return render(request, 'login.html')
-    return render(request, 'login.html')
+            return render(request, 'myapp/login.html')
+    return render(request, 'myapp/login.html')
 
 def logout_view(request):
     return render(request, 'myapp/logout.html')  # Si no tienes logout.html, usa Django auth.logout

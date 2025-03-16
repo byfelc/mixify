@@ -73,18 +73,16 @@ WSGI_APPLICATION = 'proyecto.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'mongodb': {
-        'ENGINE': 'django_mongodb_engine',
-        'NAME': 'mixifydb',
-        'USER': '1234',
-        'PASSWORD': '1234',
-        'HOST': 'cluster',
-        'PORT': 27017,
+        'ENGINE': 'djongo',  # 🔹 Usamos Djongo para MongoDB
+        'NAME': 'mixifydb',  # 🔹 Nombre de la base de datos en MongoDB
+        'ENFORCE_SCHEMA': False,  # 🔹 No aplica restricciones de SQL
+        'CLIENT': {
+            'host': 'mongodb+srv://1234:1234@mixify.4va0z.mongodb.net/?retryWrites=true&w=majority&appName=mixifypip',  # 🔹 Cambia con tus credenciales
+            'port': 27017,  # 🔹 No es necesario en MongoDB Atlas
+        },
     }
 }
+
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',

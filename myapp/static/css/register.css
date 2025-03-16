@@ -89,7 +89,7 @@ body {
     max-width: 500px;
 }
 
-.input-group input, input[type="email"], input[type="password"] {
+.input-group input, input[type="email"], input[type="password"], input[type="text"] {
     border-radius: 5px;
     border: none;
     background: #3d3d56;

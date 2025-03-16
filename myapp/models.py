@@ -4,14 +4,14 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path='myapp\.env')
+load_dotenv()
 MONGODB_URI = os.environ.get('MONGODB_URI')
 client = MongoClient(MONGODB_URI)
 db = client['mixifydb']
 
 class CustomUsermanager(BaseUserManager):
 
-    def create_user(self, usuario, nombre, correo, telefono, estatus, contrasena):
+    def create_user(self, usuario, nombre, correo, contrasena):
         if not usuario:
             raise ValueError("Ingrese nombre de usuario")
         
@@ -19,7 +19,6 @@ class CustomUsermanager(BaseUserManager):
             usuario=usuario,
             nombre=nombre,
             correo=correo,
-            estatus=estatus
             )
         if contrasena:
             user.set_password(contrasena)
@@ -31,7 +30,6 @@ class CustomUser(AbstractBaseUser):
     usuario = models.CharField(max_length=100, unique=True)
     correo = models.EmailField(max_length=100)
     contrasena = models.CharField(max_length=100)
-    estatus = models.BooleanField(default=True)
     fecha_registro = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = 'usuario'
@@ -43,20 +41,21 @@ class CustomUser(AbstractBaseUser):
         return self.usuario
 
     def save(self, *args, **kwargs):
-        if self.contrasena:
-            self.set_password(self.contrasena) 
-        super().save(*args, **kwargs)
-        collection = db['usuarios']
-        
-        user_data = {
-            'nombre': self.nombre,
-            'usuario': self.usuario,
-            'contrasena': self.contrasena,
-            'correo': self.correo,
-            'estatus': self.estatus,
-            'fecha_registro': self.fecha_registro
-        }
-        collection.insert_one(user_data)
+        if not self.pk:  # 🔹 Solo se ejecuta cuando se crea un usuario nuevo
+            self.set_password(self.contrasena)
+            super().save(*args, **kwargs)  # 🔹 Guarda en Django para asignar un ID
+
+            # 🔹 Guardar en MongoDB solo si es nuevo
+            collection = db['usuarios']
+            user_data = {
+                'nombre': self.nombre,
+                'usuario': self.usuario,
+                'correo': self.correo,
+                'fecha_registro': self.fecha_registro
+            }
+            collection.insert_one(user_data)
+        else:
+            super().save(*args, **kwargs)  # 🔹 Si ya tiene ID, solo actualiza
 
 class Ingrediente(models.Model):
     nombre = models.CharField(max_length=100)
