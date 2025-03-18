@@ -1,14 +1,7 @@
 from pymongo import MongoClient
-import os
 
-from dotenv import load_dotenv
+MONGO_URI = "mongodb+srv://iracheta602:Mixify1234@mixify.4va0z.mongodb.net/?retryWrites=true&w=majority&appName=mixify"
 
-load_dotenv(dotenv_path='myapp\.env')
-MONGODB_URI = os.environ.get('MONGODB_URI')
-client = MongoClient(MONGODB_URI)
-db = client['mixifydb']
-
-collections = db.list_collection_names()
-for collection in collections:
-    print(collection)
-
+client = MongoClient(MONGO_URI)
+db = client['mixify']  # Aquí debes poner el nombre de tu base (¿se llama también mixify o diferente?)
+usuarios_collection = db['usuarios']  # Ajusta si tu colección se llama diferente

@@ -12,28 +12,50 @@
             <h2>Regístrate y comienza a mezclar</h2>
         </div>
     </div>
+
     <div class="right-section">
         <h1>Crear una cuenta</h1>
         <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+
+        <!-- 🔹 Mensajes de error/success -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <form method="POST">
             {% csrf_token %}
-            <label for="nombre">Nombre Completo:</label><br>
+
             <div class="input-group">
+                <label for="nombre">Nombre Completo:</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo" required>
             </div>
-            <label for="usuario">Usuario:</label><br>
-            <div class="input-group">    
-                <input type="text" id="usuario" name="usuario" placeholder="Usuario" required><br><br>
+
+            <div class="input-group">
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
             </div>
-            <label for="correo">Correo Electrónico:</label><br>
-            <input type="email" name="correo" id='correo' placeholder="Correo electrónico" required>
-            <label for="contrasena">Contraseña:</label><br>
-            <input type="password" name="contrasena" id='contrasena' placeholder="Contraseña" required>
-            <input type="password" name="confirm_password" placeholder="Confirmar contraseña" required>
+
+            <div class="input-group">
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" name="correo" id="correo" placeholder="Correo electrónico" required>
+            </div>
+
+            <div class="input-group">
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
+            </div>
+
+            <div class="input-group">
+                <label for="confirm_password">Confirmar Contraseña:</label>
+                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmar contraseña" required>
+            </div>
 
             <button type="submit" class="register-btn">Crear cuenta</button>
         </form>
     </div>
 </div>
 {% endblock %}
-

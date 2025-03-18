@@ -10,7 +10,7 @@
 /* 🔹 Navbar */
 .navbar {
     width: 100%;
-    background: rgb(20, 10, 35); /* 🔹 Ahora es negro */
+    background: #382d3d;  /* 🔹 Color oscuro para mantener el estilo */
     padding: 15px 0;
     position: fixed;
     top: 0;
@@ -18,12 +18,13 @@
     display: flex;
     justify-content: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
 }
 
 /* 🔹 Contenedor del navbar */
 .nav-container {
     width: 90%;
-    max-width: 1400px;
+    max-width: 1200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -48,25 +49,59 @@
 /* 🔹 Estilos del usuario */
 .nav-user {
     color: white;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 /* 🔹 Estilos de los botones */
 .btn-login, .btn-logout {
-    background: #7d5eff;
+    background: #4b4053;
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
     text-decoration: none;
     font-size: 16px;
-    transition: background 0.3s;
+    transition: background 0.3s ease-in-out;
+    border: none;
 }
 
 .btn-login:hover, .btn-logout:hover {
-    background: #5a42cc;
+    background: #2e2635;
 }
 
 /* 🔹 Espaciado para que el contenido no quede oculto debajo del navbar */
 .content {
-    margin-top: 80px;
+    margin-top: 90px;
+}
+
+/* 🔹 Mensajes de éxito o error */
+.messages {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+.alert {
+    padding: 12px;
+    border-radius: 5px;
+    margin: 10px auto;
+    width: 50%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.alert.success { background-color: #4CAF50; color: white; }
+.alert.error { background-color: #f44336; color: white; }
+.alert.warning { background-color: #ff9800; color: white; }
+
+/* 🔹 Footer */
+.footer {
+    text-align: center;
+    padding: 12px;
+    background: #382d3d;
+    color: white;
+    margin-top: auto;
+    font-size: 14px;
+    font-weight: 300;
 }
