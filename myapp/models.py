@@ -58,16 +58,15 @@ class CustomUser(AbstractBaseUser):
         }
         collection.insert_one(user_data)
 
-class Ingrediente(models.Model):
-    nombre = models.CharField(max_length=100)
-    cantidad = models.IntegerField(default=100)  # Porcentaje del ingrediente
+def HistorialBebidas():
+    historial = db["historial_bebidas"]
+    historial_bebidas = list(historial.find({},{"_id":0}))
+    return historial_bebidas
 
-    def __str__(self):
-        return f"{self.nombre} ({self.cantidad}%)"
+    #nombre = models.CharField(max_length=200)
+    #fecha = models.DateTimeField(auto_now_add=True)
 
-class HistorialBebidas(models.Model):
-    nombre = models.CharField(max_length=200)
-    fecha = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.nombre} - {self.fecha}"
+def Contenedores():
+    contenedores = db["estado-contenedores"]
+    estado_contenedores = list(contenedores.find({},{"_id":0}))
+    return estado_contenedores

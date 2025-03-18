@@ -18,15 +18,15 @@
         <form method="POST">
             {% csrf_token %}
             <div class="input-group">
-                <input type="text" name="first_name" placeholder="Nombre" required>
-                <input type="text" name="last_name" placeholder="Apellido" required>
+                <input type="text" name="nombre" placeholder="Nombre" required>
+                <input type="text" name="Apellido" placeholder="Apellido" required>
             </div>
             <label for="usuario">Usuario:</label><br>
             <input type="text" id="usuario" name="usuario" required><br><br>
             <label for="email">Correo Electrónico:</label><br>
-            <input type="email" name="email" id='email' placeholder="Correo electrónico" required>
+            <input type="email" name="correo" id='correo' placeholder="Correo electrónico" required>
             <label for="contrasena">Contraseña:</label><br>
-            <input type="password" name="password" id='contrasena' placeholder="Contraseña" required>
+            <input type="password" name="contrasena" id='contrasena' placeholder="Contraseña" required>
             <input type="password" name="confirm_password" placeholder="Confirmar contraseña" required>
 
             <button type="submit" class="register-btn">Crear cuenta</button>
