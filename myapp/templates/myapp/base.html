@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mixify</title>
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+</head>
+<body>
+
+    <!-- 🔹 Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'home' %}" class="nav-logo">MIXIFY</a>
+            <div class="nav-links">
+                {% if request.session.is_authenticated %}
+                    <span class="nav-user">Hola, {{ request.session.nombre }}</span>
+                    <a href="{% url 'logout' %}" class="btn-logout">Cerrar sesión</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-login">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- 🔹 Contenido dinámico -->
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- 🔹 Footer -->
+    <footer class="footer">
+        <p>© Mixify 2025 - Proyecto Demo</p>
+    </footer>
+
+</body>
+</html>

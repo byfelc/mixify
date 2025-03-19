@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 🔹 Navbar */
+.navbar {
+    width: 100%;
+    background: #382d3d;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+/* 🔹 Contenedor del navbar */
+.nav-container {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 🔹 Estilos del logo */
+.nav-logo {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 🔹 Estilos de los links */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 🔹 Estilos del usuario */
+.nav-user {
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* 🔹 Estilos de los botones */
+.btn-login, .btn-logout {
+    background: #4b4053;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.3s ease-in-out;
+    border: none;
+}
+
+.btn-login:hover, .btn-logout:hover {
+    background: #2e2635;
+}
+
+/* 🔹 Espaciado para que el contenido no quede oculto debajo del navbar */
+.content {
+    margin-top: 90px;
+    flex-grow: 1; /* 🔵 El contenido crecerá para empujar el footer */
+}
+
+/* 🔹 Mensajes de éxito o error */
+.messages {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+.alert {
+    padding: 12px;
+    border-radius: 5px;
+    margin: 10px auto;
+    width: 50%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.alert.success { background-color: #4CAF50; color: white; }
+.alert.error { background-color: #f44336; color: white; }
+.alert.warning { background-color: #ff9800; color: white; }
+
+/* 🔹 Footer siempre al fondo */
+.footer {
+    text-align: center;
+    padding: 12px;
+    background: #382d3d;
+    color: white;
+    font-size: 14px;
+    font-weight: 300;
+}

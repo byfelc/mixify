@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-image: url('../images/purple3.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* 🔵 Ahora que sea 90% del ancho real */
+.container {
+    display: flex;
+    width: 70vw; /* ✅ Usa viewport width para hacerlo más real */
+    max-width: 1400px;
+    margin: 40px auto; /* ✅ Centramos con margin auto */
+    background: #382d3d;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
+    min-height: 600px;
+}
+
+/* 🔵 Imagen más pequeña */
+.left-section {
+    width: 50%;
+    background-image: url('../images/trago.avif');  
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* 🔵 Formulario más amplio */
+.right-section {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background: #2e2635;
+    color: white;
+    text-align: center;
+}
+
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.overlay h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+
+.right-section h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.right-section p {
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.right-section a {
+    color: #7d5eff;
+    text-decoration: none;
+}
+
+.right-section a:hover {
+    text-decoration: underline;
+}
+
+.input-group {
+    width: 100%;
+    max-width: 450px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.input-group input, input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    background: #3d3d56;
+    color: white;
+    outline: none;
+    margin-bottom: 12px;
+}
+
+.input-group input::placeholder {
+    color: #b3b3b3;
+}
+
+.register-btn {
+    width: 100%;
+    max-width: 450px;
+    background: #7d5eff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out;
+}
+
+.register-btn:hover {
+    background: #5a42cc;
+}
+
+/* 🔹 Responsive */
+@media (max-width: 1024px) {
+    .container {
+        width: 80%; /* Más ancho en tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .left-section {
+        width: 100%;
+        height: 200px;
+    }
+
+    .right-section {
+        width: 100%;
+        padding: 30px;
+    }
+}

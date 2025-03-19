@@ -1,0 +1,26 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/historial.css' %}">
+
+<div class="container">
+    <h1>Historial de Bebidas</h1>
+    {% if request.session.is_authenticated %}
+        <div class="history-scroll">
+            {% for bebida in historial %}
+                <div class="history-item">
+                    <p><strong>Bebida:</strong> {{ bebida.liquido_servido }}</p>
+                    <p><strong>Cantidad:</strong> {{ bebida.cant_servida }} ml</p>
+                    <p><strong>Fecha:</strong> {{ bebida.fecha_formateada }}</p>
+                </div>
+            {% empty %}
+                <p>No hay bebidas registradas.</p>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Para ver tu historial de bebidas, <a href="{% url 'login' %}">inicia sesión</a>.</p>
+    {% endif %}
+    <a href="{% url 'home' %}" class="btn-back">🔙 Volver al Home</a>
+</div>
+{% endblock %}
