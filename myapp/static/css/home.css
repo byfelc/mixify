@@ -8,7 +8,7 @@
 }
 
 body {
-    background-image: url('../images/purple.avif');  /* 🔹 Asegúrate de que la ruta sea correcta */
+    background-image: url('../images/purple.avif');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -27,19 +27,19 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 65vh;  /* 🔹 Reducido un poco para pantallas más pequeñas */
+    height: 65vh;
     width: 100%;
     padding: 5px;
 }
 
 .hero-content {
-    max-width: 750px; /* 🔹 Reducido de 900px a 750px para que se ajuste mejor */
+    max-width: 750px;
     padding: 15px;
 }
 
 /* 🔹 Título principal */
 .hero-content h1 {
-    font-size: 2.5rem; /* 🔹 Antes 3rem, ahora más equilibrado */
+    font-size: 2.5rem;
     font-weight: 700;
 }
 
@@ -49,22 +49,22 @@ body {
 
 /* 🔹 Subtítulo */
 .hero-content p {
-    font-size: 1.1rem; /* 🔹 Reducido de 1.2rem para evitar que ocupe mucho espacio */
+    font-size: 1.1rem;
     margin-top: 8px;
 }
 
-/* 🔹 Botones más ajustados */
+/* 🔹 Botones */
 .hero-buttons {
-    margin-top: 20px;  /* 🔹 Reducido para que los botones no queden muy lejos */
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     gap: 15px;
 }
 
 .btn-primary, .btn-secondary {
-    padding: 12px 35px;  /* 🔹 Botones más compactos */
+    padding: 12px 35px;
     border-radius: 8px;
-    font-size: 1.1rem;  /* 🔹 Antes 1.3rem, ahora más proporcional */
+    font-size: 1.1rem;
     text-decoration: none;
     color: white;
     transition: background 0.3s, transform 0.2s;
@@ -89,20 +89,19 @@ body {
     transform: scale(1.05);
 }
 
-/* 🔹 Tarjetas de estadísticas en fila */
+/* 🔹 Tarjetas de estadísticas */
 .stats-container {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-top: 5px;  /* 🔹 Reducido el margen para acercarlas más a los botones */
+    margin-top: 5px;
     flex-wrap: wrap;
 }
 
-/* 🔹 Tarjetas con borde blanco y fondo transparente */
 .stat-box {
     background: transparent;
     border: 2px solid white;
-    padding: 15px; /* 🔹 Ajustado para que no se vean demasiado grandes */
+    padding: 15px;
     border-radius: 10px;
     text-align: center;
     min-width: 220px;
@@ -115,15 +114,22 @@ body {
 }
 
 .stat-box h2 {
-    font-size: 1.8rem; /* 🔹 Reducido para que no se vean demasiado grandes */
+    font-size: 1.8rem;
     color: #7d5eff;
 }
 
 .stat-box p {
-    font-size: 0.95rem; /* 🔹 Ajustado para que no ocupe tanto espacio */
+    font-size: 0.95rem;
 }
 
-/* 🔹 Ajustes responsivos */
+/* 🔹 Bienvenida personalizada */
+.hero-content h1.welcome-msg {
+    color: #7d5eff;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+/* 🔹 Ajustes responsive */
 @media (max-width: 950px) {
     .hero-section {
         height: auto;
@@ -140,7 +146,7 @@ body {
     }
 
     .btn-primary, .btn-secondary {
-        width: 90%; /* 🔹 Botones más grandes en móviles */
+        width: 90%;
     }
 
     .stats-container {

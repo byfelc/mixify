@@ -2,31 +2,18 @@
 {% load static %}
 
 {% block content %}
-<!-- Enlazar el CSS del login -->
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
 
 <div class="container">
-    <!-- 🔹 Sección izquierda con la imagen -->
     <div class="left-section">
         <div class="overlay">
             <h1>MIXIFY</h1>
             <h2>Inicia sesión</h2>
         </div>
     </div>
-
-    <!-- 🔹 Sección derecha con el formulario -->
     <div class="right-section">
         <h1>Inicia sesión</h1>
         <p>¿No tienes una cuenta? <a href="{% url 'register' %}">Crea una cuenta</a></p>
-
-        <!-- 🔹 Mensajes de error -->
-        {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                    <div class="alert {{ message.tags }}">{{ message }}</div>
-                {% endfor %}
-            </div>
-        {% endif %}
 
         <form method="POST">
             {% csrf_token %}

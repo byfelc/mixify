@@ -8,29 +8,27 @@
 }
 
 body {
-    display: flex;
-    height: 100vh;
     background-image: url('../images/purple3.avif');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
 }
 
-/* 🔹 Contenedor principal */
+/* 🔵 Ahora que sea 90% del ancho real */
 .container {
     display: flex;
-    width: 85%;  
-    max-width: 950px;
-    height: 80vh;
+    width: 70vw; /* ✅ Usa viewport width para hacerlo más real */
+    max-width: 1400px;
+    margin: 40px auto; /* ✅ Centramos con margin auto */
     background: #382d3d;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
+    min-height: 600px;
 }
 
-/* 🔹 Sección izquierda con la imagen */
+/* 🔵 Imagen más pequeña */
 .left-section {
     width: 50%;
     background-image: url('../images/trago.avif');  
@@ -39,7 +37,20 @@ body {
     position: relative;
 }
 
-/* 🔹 Overlay oscuro */
+/* 🔵 Formulario más amplio */
+.right-section {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background: #2e2635;
+    color: white;
+    text-align: center;
+}
+
+
 .overlay {
     position: absolute;
     width: 100%;
@@ -54,22 +65,10 @@ body {
 }
 
 .overlay h1 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: 10px;
 }
 
-/* 🔹 Sección derecha del formulario */
-.right-section {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-    background: #2e2635;
-    color: white;
-    text-align: center;
-}
 
 .right-section h1 {
     font-size: 2rem;
@@ -90,12 +89,10 @@ body {
     text-decoration: underline;
 }
 
-/* 🔹 Inputs */
 .input-group {
     width: 100%;
-    max-width: 500px;
+    max-width: 450px;
     text-align: left;
-    margin-bottom: 15px;
 }
 
 .input-group label {
@@ -105,7 +102,7 @@ body {
     font-weight: 600;
 }
 
-.input-group input {
+.input-group input, input[type="email"], input[type="password"] {
     width: 100%;
     padding: 12px;
     font-size: 1rem;
@@ -114,23 +111,22 @@ body {
     background: #3d3d56;
     color: white;
     outline: none;
+    margin-bottom: 12px;
 }
 
 .input-group input::placeholder {
     color: #b3b3b3;
 }
 
-/* 🔹 Botón */
 .register-btn {
     width: 100%;
-    max-width: 500px;
+    max-width: 450px;
     background: #7d5eff;
     color: white;
     border: none;
     padding: 12px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
     font-size: 1rem;
     transition: background 0.3s ease-in-out;
 }
@@ -139,32 +135,10 @@ body {
     background: #5a42cc;
 }
 
-/* 🔹 Mensajes de error o éxito */
-.messages {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-}
-
-.alert {
-    padding: 12px;
-    border-radius: 5px;
-    margin: 10px auto;
-    width: 80%;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.alert.success { background-color: #4CAF50; color: white; }
-.alert.error { background-color: #f44336; color: white; }
-.alert.warning { background-color: #ff9800; color: white; }
-
 /* 🔹 Responsive */
 @media (max-width: 1024px) {
     .container {
-        width: 90%;
-        height: 75vh;
+        width: 80%; /* Más ancho en tablets */
     }
 }
 
@@ -172,7 +146,6 @@ body {
     .container {
         flex-direction: column;
         width: 90%;
-        height: auto;
     }
 
     .left-section {

@@ -1,92 +1,107 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required  # Para proteger rutas
-from django.contrib.auth import authenticate, login as auth_login, logout
-from django.contrib import messages  # Para mostrar mensajes de error/éxito
-from .models import HistorialBebidas, Ingrediente, CustomUser  # Importamos modelos
+from django.http import HttpResponse
+from .db_con import usuarios_collection, historial_collection, ingredientes_collection
+import bcrypt
+import requests
+from datetime import datetime
 
-
-# 🔹 Home (protegido)
-@login_required(login_url='login')
+# ✅ HOME
 def home(request):
     return render(request, 'myapp/home.html')
 
-
-# 🔹 Registro de usuarios
+# ✅ REGISTER
 def register(request):
     if request.method == 'POST':
-        nombre = request.POST['nombre']
-        usuario = request.POST['usuario']
-        contrasena = request.POST['contrasena']
-        correo = request.POST['correo']
+        nombre = request.POST.get('nombre', '').strip()
+        usuario = request.POST.get('usuario', '').strip()
+        correo = request.POST.get('correo', '').strip()
+        contrasena = request.POST.get('contrasena', '').strip()
+        confirm = request.POST.get('confirm_password', '').strip()
 
-        # Verificar si el usuario ya existe
-        if CustomUser.objects.filter(username=usuario).exists():
-            messages.error(request, "❌ El usuario ya está registrado.")
-            return redirect('register')
+        if contrasena != confirm:
+            return HttpResponse("Las contraseñas no coinciden", status=400)
 
-        # Crear usuario con contraseña encriptada
-        user = CustomUser(
-            username=usuario,
-            nombre=nombre,
-            correo=correo,
-        )
-        user.set_password(contrasena)  # 🔐 Encripta la contraseña
-        user.save()
+        existing_user = usuarios_collection.find_one({"usuario": usuario})
+        if existing_user:
+            return HttpResponse("Este usuario ya existe", status=400)
 
-        messages.success(request, "✅ Registro exitoso. ¡Ahora puedes iniciar sesión!")
+        hashed = bcrypt.hashpw(contrasena.encode('utf-8'), bcrypt.gensalt())
+
+        usuarios_collection.insert_one({
+            "nombre": nombre,
+            "usuario": usuario,
+            "correo": correo,
+            "password": hashed,
+            "estado": "activo"
+        })
+
         return redirect('login')
-
     return render(request, 'myapp/register.html')
 
-
-# 🔹 Login de usuario
+# ✅ LOGIN
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST["usuario"]
-        password = request.POST["contrasena"]
+        usuario = request.POST.get('usuario', '').strip()
+        contrasena = request.POST.get('contrasena', '').strip()
 
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            auth_login(request, user)
-            messages.success(request, f"✅ Bienvenido, {user.username}!")
+        user = usuarios_collection.find_one({"usuario": usuario})
+
+        if user and bcrypt.checkpw(contrasena.encode('utf-8'), user['password']):
+            request.session['usuario'] = user['usuario']
+            request.session['nombre'] = user['nombre']
+            request.session['usuario_id'] = str(user['_id'])
+            request.session['is_authenticated'] = True
             return redirect('home')
         else:
-            messages.error(request, "❌ Usuario o contraseña incorrectos.")
-            return redirect('login')
+            return HttpResponse("Usuario o contraseña incorrectos", status=401)
 
     return render(request, 'myapp/login.html')
 
-
-# 🔹 Logout
+# ✅ LOGOUT
 def logout_view(request):
-    logout(request)
-    messages.success(request, "✅ Has cerrado sesión correctamente.")
+    request.session.flush()
     return redirect('login')
 
-
-# 🔹 Historial de bebidas (protegido)
-@login_required(login_url='login')
+# ✅ HISTORIAL DE BEBIDAS GLOBAL
 def historial_bebidas(request):
-    historial = HistorialBebidas.objects.order_by('-fecha')[:5]  
+    if not request.session.get('is_authenticated'):
+        return redirect('login')
+    
+    # Ordena por fecha descendente (el más nuevo primero)
+    historial = list(historial_collection.find().sort('fecha', -1))
+
+    for registro in historial:
+        try:
+            registro["fecha_formateada"] = datetime.strptime(
+                registro["fecha"], "%Y-%m-%dT%H:%M:%S"
+            ).strftime("%d/%m/%Y %H:%M")
+        except Exception:
+            registro["fecha_formateada"] = registro["fecha"]
+
     return render(request, 'myapp/historial.html', {'historial': historial})
 
-
-# 🔹 Gestión de ingredientes (protegido)
-@login_required(login_url='login')
 def gestion_ingredientes(request):
-    ingredientes = Ingrediente.objects.all()[:2]  # Solo mostrar 2 ingredientes
+    if not request.session.get('is_authenticated'):
+        return redirect('login')
+
+    ingredientes = list(ingredientes_collection.find({}))
 
     if request.method == 'POST':
-        for i, ingrediente in enumerate(ingredientes, start=1):
-            nombre_nuevo = request.POST.get(f'nombre_{i}')
-            cantidad_nueva = request.POST.get(f'cantidad_{i}')
+        for i in range(1, len(ingredientes) + 1):
+            original_nombre = request.POST.get(f'original_nombre_{i}')
+            nuevo_nombre = request.POST.get(f'nombre_{i}')
+            tipo = request.POST.get(f'tipo_{i}')
+            cantidad = request.POST.get(f'cantidad_{i}')
 
-            if nombre_nuevo and cantidad_nueva:  # Evitar errores si no hay valores
-                ingrediente.nombre = nombre_nuevo
-                ingrediente.cantidad = cantidad_nueva
-                ingrediente.save()
-
-        messages.success(request, "✅ Ingredientes actualizados correctamente.")
+            if original_nombre and nuevo_nombre and tipo and cantidad:
+                ingredientes_collection.update_one(
+                    {'nombre': original_nombre},
+                    {'$set': {
+                        'nombre': nuevo_nombre,
+                        'tipo': tipo,
+                        'Cant_rest': int(cantidad)
+                    }}
+                )
+        return redirect('gestion')
 
     return render(request, 'myapp/gestion.html', {'ingredientes': ingredientes})
- 

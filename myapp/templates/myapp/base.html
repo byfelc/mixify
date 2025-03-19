@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mixify</title>
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">  <!-- Agregamos un CSS base opcional -->
 </head>
 <body>
 
@@ -16,26 +14,17 @@
         <div class="nav-container">
             <a href="{% url 'home' %}" class="nav-logo">MIXIFY</a>
             <div class="nav-links">
-                {% if user.is_authenticated %}
-                    <span class="nav-user">Hola, {{ user.username }}</span>
+                {% if request.session.is_authenticated %}
+                    <span class="nav-user">Hola, {{ request.session.nombre }}</span>
                     <a href="{% url 'logout' %}" class="btn-logout">Cerrar sesión</a>
                 {% else %}
-                    <a href="{% url 'login' %}" class="btn-login">Iniciar Sesión</a>
+                    <a href="{% url 'login' %}" class="btn-login">Login</a>
                 {% endif %}
             </div>
         </div>
     </nav>
 
-    <!-- 🔹 Mensajes -->
-    {% if messages %}
-        <div class="messages">
-            {% for message in messages %}
-                <div class="alert {{ message.tags }}">{{ message }}</div>
-            {% endfor %}
-        </div>
-    {% endif %}
-
-    <!-- 🔹 Contenido de la página -->
+    <!-- 🔹 Contenido dinámico -->
     <div class="content">
         {% block content %}
         {% endblock %}
@@ -43,9 +32,8 @@
 
     <!-- 🔹 Footer -->
     <footer class="footer">
-        <p>&copy; 2025 Mixify - Todos los derechos reservados.</p>
+        <p>© Mixify 2025 - Proyecto Demo</p>
     </footer>
 
 </body>
 </html>
-

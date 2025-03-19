@@ -7,7 +7,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* 🔹 Fondo morado */
 body {
     display: flex;
     height: 100vh;
@@ -17,67 +16,98 @@ body {
     align-items: center;
 }
 
-/* 🔹 Contenedor principal (Mismo tamaño que Registro) */
+/* 🔹 Contenedor principal */
 .container {
-    width: 1200px;
-    height: 800px;
+    width: 1000px;
+    min-height: 800px;
     background: #382d3d;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    overflow-y: auto;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 40px;
     text-align: center;
     color: white;
 }
 
-/* 🔹 Estilos del historial y gestión */
-.history, .ingredient-box {
-    background: #3d3d56;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 10px auto;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+/* 🔹 Títulos */
+.container h1 {
+    font-size: 36px;
+    margin-bottom: 25px;
 }
 
-.ingredient-box input {
-    width: 85%;
-    padding: 10px;
+/* 🔹 Caja de cada contenedor */
+.ingredient-box {
+    background: #3d3d56;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 🔹 Inputs y selects */
+.ingredient-box input,
+.ingredient-box select {
+    width: 90%;
+    padding: 14px;
+    font-size: 20px;
+    margin: 8px 0;
     border: none;
     border-radius: 5px;
     background: #4b4053;
     color: white;
-    margin-bottom: 10px;
     text-align: center;
+}
+
+/* 🔹 Texto dentro de cada caja */
+.ingredient-box p,
+.ingredient-box label {
+    font-size: 22px;
+    margin-bottom: 5px;
 }
 
 /* 🔹 Botones */
 .save-btn, .btn-back {
     background: #7d5eff;
     color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 14px 28px;
+    border-radius: 6px;
     text-decoration: none;
-    margin-top: 10px;
-    font-size: 18px;
-    transition: background 0.3s;
+    margin: 20px 10px 0;
+    font-size: 20px;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
 }
 
 .save-btn:hover, .btn-back:hover {
     background: #5a42cc;
+    transform: scale(1.05);
+}
+
+/* 🔹 Scroll */
+.container::-webkit-scrollbar {
+    width: 8px;
+}
+.container::-webkit-scrollbar-thumb {
+    background: #7d5eff;
+    border-radius: 4px;
 }
 
 /* 🔹 Responsivo */
 @media (max-width: 768px) {
     .container {
-        width: 90%;
-        height: auto;
+        width: 95%;
         padding: 20px;
+    }
+    .ingredient-box input, .ingredient-box select {
+        font-size: 14px;
+    }
+    .save-btn, .btn-back {
+        font-size: 16px;
     }
 }

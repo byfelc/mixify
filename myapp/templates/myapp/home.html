@@ -7,12 +7,19 @@
 
 <div class="hero-section">
     <div class="hero-content">
-        <h1>Descubre el poder de <span>Mixify</span></h1>
-        <p>Automatiza la preparación de bebidas con precisión y facilidad.</p>
-        <div class="hero-buttons">
-            <a href="{% url 'historial' %}" class="btn-primary">Historial de Bebidas</a>
-            <a href="{% url 'gestion' %}" class="btn-secondary">Gestión de Ingredientes</a>
-        </div>
+        {% if request.session.is_authenticated %}
+            <h1>¡Bienvenido, {{ request.session.nombre }}!</h1>
+            <p>Automatiza la preparación de bebidas con precisión y facilidad.</p>
+            <div class="hero-buttons">
+                <a href="{% url 'historial' %}" class="btn-primary">Historial de Bebidas</a>
+                <a href="{% url 'gestion' %}" class="btn-secondary">Gestión de Ingredientes</a>
+            </div>
+
+        {% else %}
+            <h1>Descubre el poder de <span>Mixify</span></h1>
+            <p>Automatiza la preparación de bebidas con precisión y facilidad.</p>
+            <a href="{% url 'login' %}" class="btn-primary">Inicia sesión para comenzar</a>
+        {% endif %}
     </div>
 </div>
 
@@ -20,7 +27,7 @@
 <div class="stats-container">
     <div class="stat-box">
         <h2>2</h2>
-        <p>Tipos de liquidos</p>
+        <p>Tipos de líquidos</p>
     </div>
     <div class="stat-box">
         <h2>90%</h2>

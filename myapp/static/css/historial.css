@@ -7,45 +7,95 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* 🔹 Fondo morado */
 body {
     display: flex;
     height: 100vh;
     background-image: url('../images/purple2.avif');
     background-size: cover;
+    background-position: center;
     justify-content: center;
     align-items: center;
 }
 
-/* 🔹 Contenedor principal (Mismo tamaño que Registro) */
+/* Contenedor principal */
 .container {
     width: 1200px;
     height: 800px;
     background: #382d3d;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 40px;
     text-align: center;
     color: white;
+    position: relative;
 }
 
-/* 🔹 Estilos del historial y gestión */
-.history, .ingredient-box {
+/* Título */
+.container h1 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Historial con scroll */
+.history-scroll {
+    width: 100%;
+    max-width: 450px;
+    height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Tarjeta individual */
+.history-item {
     background: #3d3d56;
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
-    margin: 10px auto;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 15px;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
 }
 
+.history-item:hover {
+    transform: translateY(-4px);
+}
+
+.history-item p {
+    margin: 5px 0;
+    font-size: 15px;
+}
+
+/* Scrollbar personalizado */
+.history-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+.history-scroll::-webkit-scrollbar-thumb {
+    background: #7d5eff;
+    border-radius: 4px;
+}
+
+/* Botones */
+.save-btn, .btn-back {
+    background: #7d5eff;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 15px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.save-btn:hover, .btn-back:hover {
+    background: #5a42cc;
+    transform: translateY(-2px);
+}
+
+/* Inputs de gestión de ingredientes */
 .ingredient-box input {
     width: 85%;
     padding: 10px;
@@ -57,27 +107,35 @@ body {
     text-align: center;
 }
 
-/* 🔹 Botones */
-.save-btn, .btn-back {
-    background: #7d5eff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-top: 10px;
-    font-size: 18px;
-    transition: background 0.3s;
-}
-
-.save-btn:hover, .btn-back:hover {
-    background: #5a42cc;
-}
-
-/* 🔹 Responsivo */
+/* Responsive */
 @media (max-width: 768px) {
     .container {
-        width: 90%;
+        width: 95%;
         height: auto;
         padding: 20px;
+    }
+    .history-scroll {
+        max-width: 100%;
+        height: 400px;
+    }
+}
+/* ✨ Animación de entrada */
+.history-item {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.6s forwards;
+}
+
+.history-item:nth-child(1) { animation-delay: 0.1s; }
+.history-item:nth-child(2) { animation-delay: 0.2s; }
+.history-item:nth-child(3) { animation-delay: 0.3s; }
+.history-item:nth-child(4) { animation-delay: 0.4s; }
+.history-item:nth-child(5) { animation-delay: 0.5s; }
+/* Puedes extender los nth-child según la cantidad que manejes */
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

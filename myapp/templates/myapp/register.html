@@ -2,45 +2,34 @@
 {% load static %}
 
 {% block content %}
-<!-- Enlazar el CSS del registro -->
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
 
 <div class="container">
     <div class="left-section">
         <div class="overlay">
             <h1>MIXIFY</h1>
-            <h2>Regístrate y comienza a mezclar</h2>
+            <h2>Regístrate y empieza a mezclar</h2>
         </div>
     </div>
-
     <div class="right-section">
         <h1>Crear una cuenta</h1>
         <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
-
-        <!-- 🔹 Mensajes de error/success -->
-        {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                    <div class="alert {{ message.tags }}">{{ message }}</div>
-                {% endfor %}
-            </div>
-        {% endif %}
 
         <form method="POST">
             {% csrf_token %}
 
             <div class="input-group">
-                <label for="nombre">Nombre Completo:</label>
-                <input type="text" name="nombre" id="nombre" placeholder="Nombre Completo" required>
+                <label for="nombre">Nombre completo:</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre completo" required>
             </div>
 
             <div class="input-group">
                 <label for="usuario">Usuario:</label>
-                <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
+                <input type="text" name="usuario" id="usuario" placeholder="Usuario" required>
             </div>
 
             <div class="input-group">
-                <label for="correo">Correo Electrónico:</label>
+                <label for="correo">Correo electrónico:</label>
                 <input type="email" name="correo" id="correo" placeholder="Correo electrónico" required>
             </div>
 
@@ -50,7 +39,7 @@
             </div>
 
             <div class="input-group">
-                <label for="confirm_password">Confirmar Contraseña:</label>
+                <label for="confirm_password">Confirmar contraseña:</label>
                 <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmar contraseña" required>
             </div>
 
