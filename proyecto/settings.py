@@ -3,11 +3,14 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-zteek!mhi(+lx0!%dhv(5^gd!dfic(ez9t$e7x$fs+ydss(r&c'
+# ✅ Usar la secret key desde Render
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-zteek!mhi(+lx0!%dhv(5^gd!dfic(ez9t$e7x$fs+ydss(r&c')
 
-DEBUG = True
+# ✅ Leer DEBUG como booleano
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+# ✅ Leer ALLOWED_HOSTS como lista desde Render
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -49,8 +52,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'proyecto.wsgi.application'
 
-# 🔴 QUITAMOS DATABASES porque no lo usarás con ORM
-DATABASES = {}
+DATABASES = {}  # No lo usas porque es MongoDB
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -87,5 +89,4 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Guardar sesiones sin base de datos SQL
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'

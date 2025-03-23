@@ -4,6 +4,9 @@ from .db_con import usuarios_collection, historial_collection, ingredientes_coll
 import bcrypt
 import requests
 from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
 
 # ✅ HOME
 def home(request):
@@ -105,3 +108,26 @@ def gestion_ingredientes(request):
         return redirect('gestion')
 
     return render(request, 'myapp/gestion.html', {'ingredientes': ingredientes})
+
+# ✅ API LOGIN MOBILE
+@csrf_exempt
+def api_login_mobile(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            usuario = data.get('usuario', '').strip()
+            contrasena = data.get('contrasena', '').strip()
+
+            user = usuarios_collection.find_one({"usuario": usuario})
+
+            if user and bcrypt.checkpw(contrasena.encode('utf-8'), user['password']):
+                return JsonResponse({
+                    "status": "success",
+                    "usuario": user['usuario'],
+                    "nombre": user['nombre']
+                })
+            else:
+                return JsonResponse({"status": "error", "message": "Credenciales incorrectas"}, status=401)
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+    return JsonResponse({"status": "error", "message": "Método no permitido"}, status=405)
