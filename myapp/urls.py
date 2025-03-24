@@ -9,6 +9,4 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('historial/', views.historial_bebidas, name='historial'),
     path('gestion/', views.gestion_ingredientes, name='gestion'),
-        path('api/login_mobile/', views.api_login_mobile, name='api_login_mobile'),
-
 ]
