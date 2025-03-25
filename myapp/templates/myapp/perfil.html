@@ -1,22 +1,53 @@
-{% extends 'base.html' %}
+{% extends 'myapp/base.html' %}
+{% load static %}
 
 {% block content %}
-    <div class="perfil-container">
-        <h2>Perfil de Usuario</h2>
-        
-        <!-- Mostrar imagen de perfil (Imagen predeterminada) -->
-        <div class="profile-img-container">
-            <img src="{% static 'images/IMG_3035 (1).jpeg' %}" alt="Imagen de perfil" class="profile-img" />
-        </div>
-        
-        <div class="user-info">
-            <p><strong>Nombre completo:</strong> {{ request.session.nombre }}</p>
-            <p><strong>Usuario:</strong> {{ request.session.usuario }}</p>
-            <p><strong>Correo:</strong> {{ request.session.correo }}</p>
-        </div>
-        
-        <!-- Botón de edición (si lo deseas en el futuro) -->
-        <a href="{% url 'editar_perfil' %}" class="btn-editar">Editar perfil</a>
-        
-    </div>
+<link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+
+<div class="perfil-wrapper">
+  <div class="perfil-card">
+    <form method="POST" action="{% url 'editar_perfil' %}">
+      {% csrf_token %}
+
+      <div class="avatar-container">
+        <div class="circle-avatar"></div>
+      </div>
+
+      <div class="input-group">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" name="nombre" id="nombre" value="{{ user.nombre }}" disabled required>
+      </div>
+
+      <div class="input-group">
+        <label for="usuario">Usuario</label>
+        <input type="text" name="usuario" id="usuario" value="{{ user.usuario }}" disabled required>
+      </div>
+
+      <div class="input-group">
+        <label for="correo">Correo</label>
+        <input type="email" name="correo" id="correo" value="{{ user.correo }}" disabled required>
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="editar-btn" class="btn-editar">Editar perfil</button>
+        <button type="submit" id="guardar-btn" class="btn-guardar" style="display: none;">Guardar cambios</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Activar campos y mostrar botón de guardar
+  document.addEventListener('DOMContentLoaded', function () {
+    const editarBtn = document.getElementById('editar-btn');
+    const guardarBtn = document.getElementById('guardar-btn');
+    const inputs = document.querySelectorAll('input');
+
+    editarBtn.addEventListener('click', () => {
+      inputs.forEach(input => input.removeAttribute('disabled'));
+      editarBtn.style.display = 'none';
+      guardarBtn.style.display = 'inline-block';
+    });
+  });
+</script>
 {% endblock %}

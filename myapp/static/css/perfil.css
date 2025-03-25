@@ -1,41 +1,81 @@
-/* Estilos para la pantalla de perfil */
-.perfil-container {
-    padding: 20px;
-    background-color: #2e2635;
-    border-radius: 10px;
-    color: white;
-    max-width: 600px;
-    margin: auto;
-    text-align: center;
-}
-
-.profile-img-container {
-    margin-bottom: 20px;
-}
-
-.profile-img {
-    width: 120px;
-    height: 120px;
+/* Asegura que el fondo cubra toda la ventana */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  .perfil-wrapper {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url("../images/purple3.avif") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+  }
+  
+  .perfil-card {
+    background-color: #382d3d;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 450px;
+  }
+  
+  .circle-avatar {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #fff;
-}
-
-.user-info p {
-    font-size: 18px;
-    margin: 10px 0;
-}
-
-.btn-editar {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
+    background-color: #4b3b7a;
+    border: 2px solid white;
+    margin: 0 auto 20px;
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .input-group label {
+    display: block;
+    color: white;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
     background-color: #4b4053;
     color: white;
-    text-decoration: none;
+    border: none;
     border-radius: 8px;
-}
-
-.btn-editar:hover {
-    background-color: #7d5eff;
-}
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .btn-editar,
+  .btn-guardar {
+    flex: 1;
+    padding: 10px;
+    background-color: #6c4fb0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-editar:hover,
+  .btn-guardar:hover {
+    background-color: #563d94;
+  }
+  

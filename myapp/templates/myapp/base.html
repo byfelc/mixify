@@ -7,6 +7,7 @@
   <title>Mixify</title>
   <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script> <!-- Íconos -->
 </head>
 <body>
 
@@ -21,16 +22,22 @@
 
           <div class="profile-container">
             <div class="avatar-wrapper">
+              <a href="{% url 'perfil' %}">
                 <div class="profile-circle"></div>
-                <div class="dropdown">
-                    <button class="dropbtn">☰</button>
-                    <div class="dropdown-content">
-                        <a href="{% url 'perfil' %}">Perfil</a>
-                        <a href="{% url 'logout' %}">Cerrar sesión</a>
-                    </div>
+              </a>
+              <div class="dropdown" onclick="toggleDropdown(event)">
+                <button class="dropbtn">☰</button>
+                <div class="dropdown-content" id="dropdown-menu">
+                  <a href="{% url 'perfil' %}">
+                    <i data-lucide="user" class="icon"></i> Perfil
+                  </a>
+                  <a href="{% url 'logout' %}">
+                    <i data-lucide="log-out" class="icon"></i> Cerrar sesión
+                  </a>
                 </div>
+              </div>
             </div>
-        </div>        
+          </div>
         {% else %}
           <a href="{% url 'login' %}" class="btn-login">Inicia sesión</a>
         {% endif %}
@@ -46,6 +53,32 @@
   <footer class="footer">
     <p>© Mixify 2025 - Proyecto Demo</p>
   </footer>
+
+  <script>
+    function toggleDropdown(event) {
+      event.stopPropagation();
+      const menu = document.getElementById('dropdown-menu');
+      if (menu.classList.contains('show')) {
+        menu.classList.remove('show');
+        setTimeout(() => menu.style.display = 'none', 200);
+      } else {
+        menu.style.display = 'block';
+        void menu.offsetWidth;
+        menu.classList.add('show');
+      }
+    }
+
+    document.addEventListener('click', function () {
+      const menu = document.getElementById('dropdown-menu');
+      if (menu && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+        setTimeout(() => menu.style.display = 'none', 200);
+      }
+    });
+
+    // Activar íconos
+    lucide.createIcons();
+  </script>
 
 </body>
 </html>

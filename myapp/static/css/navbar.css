@@ -13,7 +13,6 @@ html, body {
   flex-direction: column;
 }
 
-/* 🔹 Navbar */
 .navbar {
   width: 100%;
   background: #2e2635;
@@ -35,7 +34,6 @@ html, body {
   align-items: center;
 }
 
-/* 🔸 Logo MIXIFY */
 .nav-logo {
   color: white;
   font-size: 22px;
@@ -44,7 +42,6 @@ html, body {
   letter-spacing: 1px;
 }
 
-/* 🔸 Links principales */
 .nav-links {
   display: flex;
   align-items: center;
@@ -67,21 +64,18 @@ html, body {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* 🔸 Contenedor del avatar y menú */
 .profile-container {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-/* 🔸 Wrapper para avatar + ☰ */
 .avatar-wrapper {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-/* 🔸 Avatar circular morado */
 .profile-circle {
   width: 36px;
   height: 36px;
@@ -91,7 +85,6 @@ html, body {
   margin-right: 6px;
 }
 
-/* 🔸 Botón ☰ */
 .dropbtn {
   background: none;
   border: none;
@@ -101,7 +94,6 @@ html, body {
   padding: 0;
 }
 
-/* 🔸 Menú desplegable */
 .dropdown {
   position: relative;
 }
@@ -113,16 +105,27 @@ html, body {
   right: 0;
   background-color: #1e1b23;
   border-radius: 10px;
-  min-width: 150px;
+  min-width: 160px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
   z-index: 1001;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-content.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .dropdown-content a {
   color: white;
   padding: 12px 16px;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
   font-size: 15px;
 }
@@ -131,19 +134,18 @@ html, body {
   background-color: #2e2635;
 }
 
-/* Mostrar menú al hacer hover */
-.dropdown:hover .dropdown-content {
-  display: block;
+.icon {
+  width: 18px;
+  height: 18px;
 }
 
-/* 🔸 Contenido después del navbar */
+/* Contenido y footer */
 .content {
   margin-top: 90px;
   flex-grow: 1;
   padding: 20px;
 }
 
-/* 🔸 Footer */
 .footer {
   text-align: center;
   padding: 15px;

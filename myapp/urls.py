@@ -10,4 +10,5 @@ urlpatterns = [
     path('historial/', views.historial_bebidas, name='historial'),
     path('gestion/', views.gestion_ingredientes, name='gestion'),
     path('perfil/', views.perfil, name='perfil'),
+    path('editar-perfil/', views.editar_perfil, name='editar_perfil'),
 ]

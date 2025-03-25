@@ -7,6 +7,36 @@ from datetime import datetime
 from bson import ObjectId
 
 
+def editar_perfil(request):
+    if not request.session.get('is_authenticated'):
+        return redirect('login')
+
+    user_id = request.session.get('usuario_id')
+    user = usuarios_collection.find_one({'_id': ObjectId(user_id)})
+
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        usuario = request.POST.get('usuario')
+        correo = request.POST.get('correo')
+
+        usuarios_collection.update_one(
+            {'_id': ObjectId(user_id)},
+            {'$set': {
+                'nombre': nombre,
+                'usuario': usuario,
+                'correo': correo
+            }}
+        )
+
+        # 🔄 Actualiza también la sesión
+        request.session['nombre'] = nombre
+        request.session['usuario'] = usuario
+
+        return redirect('perfil')
+
+    return render(request, 'myapp/perfil.html', {'user': user})
+
+
 # ✅ HOME
 def home(request):
     return render(request, 'myapp/home.html')
