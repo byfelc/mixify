@@ -2,38 +2,50 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mixify</title>
-    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mixify</title>
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- 🔹 Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="{% url 'home' %}" class="nav-logo">MIXIFY</a>
-            <div class="nav-links">
-                {% if request.session.is_authenticated %}
-                    <span class="nav-user">Hola, {{ request.session.nombre }}</span>
-                    <a href="{% url 'logout' %}" class="btn-logout">Cerrar sesión</a>
-                {% else %}
-                    <a href="{% url 'login' %}" class="btn-login">Login</a>
-                {% endif %}
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="{% url 'home' %}" class="nav-logo">MIXIFY</a>
+
+      <div class="nav-links">
+        {% if request.session.is_authenticated %}
+          <a href="{% url 'historial' %}" class="nav-link">Historial</a>
+          <a href="{% url 'gestion' %}" class="nav-link">Gestión</a>
+
+          <div class="profile-container">
+            <div class="avatar-wrapper">
+                <div class="profile-circle"></div>
+                <div class="dropdown">
+                    <button class="dropbtn">☰</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'perfil' %}">Perfil</a>
+                        <a href="{% url 'logout' %}">Cerrar sesión</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
-
-    <!-- 🔹 Contenido dinámico -->
-    <div class="content">
-        {% block content %}
-        {% endblock %}
+        </div>        
+        {% else %}
+          <a href="{% url 'login' %}" class="btn-login">Inicia sesión</a>
+        {% endif %}
+      </div>
     </div>
+  </nav>
 
-    <!-- 🔹 Footer -->
-    <footer class="footer">
-        <p>© Mixify 2025 - Proyecto Demo</p>
-    </footer>
+  <div class="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <footer class="footer">
+    <p>© Mixify 2025 - Proyecto Demo</p>
+  </footer>
 
 </body>
 </html>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="perfil-container">
+        <h2>Perfil de Usuario</h2>
+        
+        <!-- Mostrar imagen de perfil (Imagen predeterminada) -->
+        <div class="profile-img-container">
+            <img src="{% static 'images/IMG_3035 (1).jpeg' %}" alt="Imagen de perfil" class="profile-img" />
+        </div>
+        
+        <div class="user-info">
+            <p><strong>Nombre completo:</strong> {{ request.session.nombre }}</p>
+            <p><strong>Usuario:</strong> {{ request.session.usuario }}</p>
+            <p><strong>Correo:</strong> {{ request.session.correo }}</p>
+        </div>
+        
+        <!-- Botón de edición (si lo deseas en el futuro) -->
+        <a href="{% url 'editar_perfil' %}" class="btn-editar">Editar perfil</a>
+        
+    </div>
+{% endblock %}

@@ -1,113 +1,154 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 html, body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 🔹 Navbar */
 .navbar {
-    width: 100%;
-    background: #382d3d;
-    padding: 15px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+  width: 100%;
+  background: #2e2635;
+  padding: 15px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
 }
 
-/* 🔹 Contenedor del navbar */
 .nav-container {
-    width: 90%;
-    max-width: 1200px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* 🔹 Estilos del logo */
+/* 🔸 Logo MIXIFY */
 .nav-logo {
-    color: white;
-    font-size: 24px;
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 1px;
 }
 
-/* 🔹 Estilos de los links */
+/* 🔸 Links principales */
 .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-/* 🔹 Estilos del usuario */
-.nav-user {
-    color: white;
-    font-size: 16px;
-    font-weight: 400;
+.nav-link,
+.btn-login {
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 8px 14px;
+  background: none;
+  border-radius: 6px;
+  transition: background 0.3s;
 }
 
-/* 🔹 Estilos de los botones */
-.btn-login, .btn-logout {
-    background: #4b4053;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 16px;
-    transition: background 0.3s ease-in-out;
-    border: none;
+.nav-link:hover,
+.btn-login:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.btn-login:hover, .btn-logout:hover {
-    background: #2e2635;
+/* 🔸 Contenedor del avatar y menú */
+.profile-container {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
-/* 🔹 Espaciado para que el contenido no quede oculto debajo del navbar */
+/* 🔸 Wrapper para avatar + ☰ */
+.avatar-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* 🔸 Avatar circular morado */
+.profile-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #4b3b7a;
+  border: 2px solid white;
+  margin-right: 6px;
+}
+
+/* 🔸 Botón ☰ */
+.dropbtn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* 🔸 Menú desplegable */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 42px;
+  right: 0;
+  background-color: #1e1b23;
+  border-radius: 10px;
+  min-width: 150px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  display: block;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.dropdown-content a:hover {
+  background-color: #2e2635;
+}
+
+/* Mostrar menú al hacer hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* 🔸 Contenido después del navbar */
 .content {
-    margin-top: 90px;
-    flex-grow: 1; /* 🔵 El contenido crecerá para empujar el footer */
+  margin-top: 90px;
+  flex-grow: 1;
+  padding: 20px;
 }
 
-/* 🔹 Mensajes de éxito o error */
-.messages {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-}
-
-.alert {
-    padding: 12px;
-    border-radius: 5px;
-    margin: 10px auto;
-    width: 50%;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.alert.success { background-color: #4CAF50; color: white; }
-.alert.error { background-color: #f44336; color: white; }
-.alert.warning { background-color: #ff9800; color: white; }
-
-/* 🔹 Footer siempre al fondo */
+/* 🔸 Footer */
 .footer {
-    text-align: center;
-    padding: 12px;
-    background: #382d3d;
-    color: white;
-    font-size: 14px;
-    font-weight: 300;
+  text-align: center;
+  padding: 15px;
+  background: #2e2635;
+  color: white;
+  font-size: 14px;
+  font-weight: 300;
 }

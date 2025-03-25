@@ -1,0 +1,41 @@
+/* Estilos para la pantalla de perfil */
+.perfil-container {
+    padding: 20px;
+    background-color: #2e2635;
+    border-radius: 10px;
+    color: white;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+.profile-img-container {
+    margin-bottom: 20px;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+}
+
+.user-info p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.btn-editar {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4b4053;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.btn-editar:hover {
+    background-color: #7d5eff;
+}

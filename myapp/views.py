@@ -4,6 +4,8 @@ from .db_con import usuarios_collection, historial_collection, ingredientes_coll
 import bcrypt
 import requests
 from datetime import datetime
+from bson import ObjectId
+
 
 # ✅ HOME
 def home(request):
@@ -25,7 +27,8 @@ def register(request):
         if existing_user:
             return HttpResponse("Este usuario ya existe", status=400)
 
-        hashed = bcrypt.hashpw(contrasena.encode('utf-8'), bcrypt.gensalt())
+        # ✅ Hashear y convertir a string
+        hashed = bcrypt.hashpw(contrasena.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
         usuarios_collection.insert_one({
             "nombre": nombre,
@@ -46,7 +49,7 @@ def login_view(request):
 
         user = usuarios_collection.find_one({"usuario": usuario})
 
-        if user and bcrypt.checkpw(contrasena.encode('utf-8'), user['password']):
+        if user and bcrypt.checkpw(contrasena.encode('utf-8'), user['password'].encode('utf-8')):
             request.session['usuario'] = user['usuario']
             request.session['nombre'] = user['nombre']
             request.session['usuario_id'] = str(user['_id'])
@@ -61,6 +64,14 @@ def login_view(request):
 def logout_view(request):
     request.session.flush()
     return redirect('login')
+
+# ✅ Perfil de Usuario
+def perfil(request):
+    if not request.session.get('is_authenticated'):
+        return redirect('login')
+
+    user_data = usuarios_collection.find_one({'_id': ObjectId(request.session['usuario_id'])})
+    return render(request, 'myapp/perfil.html', {'user': user_data})
 
 # ✅ HISTORIAL DE BEBIDAS GLOBAL
 def historial_bebidas(request):
